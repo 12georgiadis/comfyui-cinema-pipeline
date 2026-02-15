@@ -1,0 +1,20 @@
+{
+  "name": "Depth Map (Depth Anything V2)",
+  "description": "Extract depth maps from images using Depth Anything V2. Useful for VFX compositing, parallax effects, 3D scene reconstruction, and ControlNet conditioning. The ViT-Large model provides the best accuracy.",
+  "category": "utility",
+  "required_nodes": ["LoadImage", "SaveImage"],
+  "required_custom_nodes": ["ComfyUI-DepthAnythingV2"],
+  "recommended_models": [
+    "depth_anything_v2_vitl_fp32.safetensors",
+    "depth_anything_v2_vitb_fp32.safetensors",
+    "depth_anything_v2_vits_fp32.safetensors"
+  ],
+  "tags": ["depth", "vfx", "compositing", "3d", "controlnet", "utility"],
+  "vram_estimate_gb": 2,
+  "tips": [
+    "ViT-Large (vitl) is most accurate, ViT-Small (vits) is fastest",
+    "Output is a grayscale depth map (white = near, black = far)",
+    "Chain with ControlNet for depth-guided generation",
+    "Useful for creating parallax effects in DaVinci Resolve"
+  ]
+}

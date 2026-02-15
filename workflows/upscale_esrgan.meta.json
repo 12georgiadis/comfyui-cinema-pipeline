@@ -1,0 +1,24 @@
+{
+  "name": "Upscale (Real-ESRGAN)",
+  "description": "Upscale images 4x using Real-ESRGAN or similar upscale models. Essential for bringing AI-generated images to cinema resolution (4K+). Very fast, low VRAM usage.",
+  "category": "image",
+  "required_nodes": ["LoadImage", "UpscaleModelLoader", "ImageUpscaleWithModel", "SaveImage"],
+  "required_custom_nodes": [],
+  "recommended_models": [
+    "RealESRGAN_x4plus.pth",
+    "RealESRGAN_x4plus_anime_6B.pth",
+    "4x-UltraSharp.pth",
+    "4x_NMKD-Siax_200k.pth"
+  ],
+  "defaults": {
+    "upscale_model": "RealESRGAN_x4plus.pth"
+  },
+  "tags": ["upscale", "esrgan", "4k", "cinema-resolution", "post-processing"],
+  "vram_estimate_gb": 2,
+  "tips": [
+    "4x-UltraSharp is excellent for photorealistic images",
+    "RealESRGAN_x4plus is the most versatile",
+    "For anime/illustration style, use RealESRGAN_x4plus_anime_6B",
+    "Chain with a generation workflow: generate at 1024x576 then upscale to 4096x2304 (4K cinema)"
+  ]
+}

@@ -30,9 +30,30 @@ Infrastructure de production cinema avec ComfyUI, orchestree par Claude Code via
 - `@cloud` dans une commande = forcer Comfy Cloud
 - `@local` = forcer le PC local (defaut)
 
+## Workflows disponibles
+| Template | Description | VRAM |
+|---|---|---|
+| `sdxl_cinema_image` | Image SDXL (concept art, stills) | 8GB |
+| `wan_t2v` | Wan 2.1 Text-to-Video | 24GB |
+| `img2img_cinema` | Image-to-Image (variations, looks) | 8GB |
+| `upscale_esrgan` | Upscale 4x (Real-ESRGAN) | 2GB |
+| `frame_interpolation` | Slow-motion RIFE | 4GB |
+| `depth_map` | Depth Anything V2 (VFX) | 2GB |
+
+Chaque workflow a un `.meta.json` avec les defaults, contraintes, modeles recommandes.
+
+## Scripts utilitaires
+- `scripts/start-mcp-server.sh` -- Demarre le MCP server (charge .env)
+- `scripts/detect-nodes.py` -- Detecte les nodes installes et verifie compatibilite
+- `scripts/comfy-cloud-proxy.py` -- Client API Comfy Cloud
+- `scripts/test-connection.sh` -- Test connexion Tailscale
+- `scripts/export-pinokio-workflows.py` -- Export workflows Pinokio
+- `scripts/install-cinema-nodes.md` -- Guide d'installation des custom nodes
+
 ## Fichiers importants
 - `specs.md` -- Specs detaillees du projet
 - `.mcp.json` -- Config MCP server
-- `workflows/` -- Templates de workflows avec placeholders
-- `scripts/` -- Scripts utilitaires (test connexion, export Pinokio)
+- `.env.example` -- Variables d'environnement (copier vers .env)
+- `workflows/` -- Templates de workflows avec placeholders et metadata
+- `scripts/` -- Scripts utilitaires
 - `docs/` -- Research complete (70+ workflows, NLE integration, etc.)

@@ -94,6 +94,45 @@ All links are real. All stability ratings are honest. No hype.
 
 ---
 
+## Cinema Workflow Templates
+
+Ready-to-use workflow templates in `workflows/`, auto-discovered by the MCP server:
+
+| Template | Use Case | VRAM | Notes |
+|---|---|---|---|
+| `sdxl_cinema_image` | Concept art, stills, moodboards | 8GB | Any SDXL checkpoint |
+| `wan_t2v` | Text-to-video (Wan 2.1 14B) | 24GB | 480p-720p, 16fps, ~5s clips |
+| `img2img_cinema` | Style transfer, variations, film looks | 8GB | Denoise 0.3-0.7 for control |
+| `upscale_esrgan` | Upscale to 4K cinema resolution | 2GB | 4x with Real-ESRGAN |
+| `frame_interpolation` | Slow-motion, 16fps to 24fps | 4GB | RIFE optical flow |
+| `depth_map` | VFX compositing, parallax | 2GB | Depth Anything V2 |
+
+Each template has a `.meta.json` sidecar with defaults, constraints, recommended models, and VRAM estimates.
+
+### Quick Start (MCP Server)
+
+```bash
+# 1. Clone this repo
+git clone https://github.com/12georgiadis/comfyui-cinema-pipeline.git
+cd comfyui-cinema-pipeline
+
+# 2. Clone the MCP server
+git clone https://github.com/joenorton/comfyui-mcp-server.git mcp-server
+cd mcp-server && pip install -r requirements.txt && cd ..
+
+# 3. Configure
+cp .env.example .env
+# Edit .env with your ComfyUI IP and API keys
+
+# 4. Start the MCP server
+./scripts/start-mcp-server.sh
+
+# 5. Detect installed nodes
+python scripts/detect-nodes.py http://YOUR_COMFYUI_IP:8188
+```
+
+---
+
 ## Stability ratings
 
 | Tool | Score | Notes |

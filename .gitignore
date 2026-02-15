@@ -1,4 +1,4 @@
-# MCP server
+# MCP server (cloned dependency)
 mcp-server/
 node_modules/
 
@@ -23,3 +23,6 @@ Thumbs.db
 # ComfyUI outputs (large files)
 output/
 input/
+
+# Generated reports
+node-report.json

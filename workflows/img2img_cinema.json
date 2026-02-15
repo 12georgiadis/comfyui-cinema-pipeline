@@ -1,0 +1,122 @@
+{
+  "4": {
+    "inputs": {
+      "ckpt_name": "PARAM_MODEL"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "10": {
+    "inputs": {
+      "image": "PARAM_STR_INPUT_IMAGE",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Source Image"
+    }
+  },
+  "11": {
+    "inputs": {
+      "pixels": [
+        "10",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "PARAM_PROMPT",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Positive Prompt"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "PARAM_NEGATIVE_PROMPT",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Negative Prompt"
+    }
+  },
+  "3": {
+    "inputs": {
+      "seed": "PARAM_INT_SEED",
+      "steps": "PARAM_INT_STEPS",
+      "cfg": "PARAM_FLOAT_CFG",
+      "sampler_name": "PARAM_STR_SAMPLER_NAME",
+      "scheduler": "PARAM_STR_SCHEDULER",
+      "denoise": "PARAM_FLOAT_DENOISE",
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "cinema/img2img",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  }
+}

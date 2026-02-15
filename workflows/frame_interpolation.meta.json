@@ -1,0 +1,24 @@
+{
+  "name": "Frame Interpolation (RIFE)",
+  "description": "Increase video frame rate using RIFE optical flow interpolation. Essential for slow-motion effects and upconverting AI-generated video (16fps) to cinema frame rates (24fps, 48fps). Multiplier 2x doubles framerate, 4x quadruples it.",
+  "category": "video",
+  "required_nodes": [],
+  "required_custom_nodes": ["ComfyUI-VideoHelperSuite", "ComfyUI-Frame-Interpolation"],
+  "recommended_models": ["rife49.pth", "rife48.pth", "rife47.pth"],
+  "defaults": {
+    "multiplier": 2,
+    "fps": 24
+  },
+  "constraints": {
+    "multiplier": {"min": 2, "max": 8, "note": "2x = double fps, 4x = quadruple. Higher = slower processing"},
+    "fps": {"min": 8, "max": 60}
+  },
+  "tags": ["video", "interpolation", "slow-motion", "rife", "frame-rate", "post-processing"],
+  "vram_estimate_gb": 4,
+  "tips": [
+    "To convert 16fps Wan video to 24fps cinema: use multiplier 3 then output at 48fps (2x slow-mo) or 24fps (realtime)",
+    "For smooth slow-motion: multiplier 4 or 8",
+    "RIFE 4.9 handles large motion better than older versions",
+    "Process in segments for long videos to avoid VRAM issues"
+  ]
+}

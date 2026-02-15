@@ -1,0 +1,51 @@
+{
+  "10": {
+    "inputs": {
+      "image": "PARAM_STR_INPUT_IMAGE",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Source Image"
+    }
+  },
+  "20": {
+    "inputs": {
+      "model": "depth_anything_v2_vitl_fp32.safetensors",
+      "device": "cuda"
+    },
+    "class_type": "DownloadAndLoadDepthAnythingV2Model",
+    "_meta": {
+      "title": "Load Depth Anything V2"
+    }
+  },
+  "30": {
+    "inputs": {
+      "da_model": [
+        "20",
+        0
+      ],
+      "images": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "DepthAnythingV2",
+    "_meta": {
+      "title": "Estimate Depth"
+    }
+  },
+  "40": {
+    "inputs": {
+      "filename_prefix": "cinema/depth",
+      "images": [
+        "30",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Depth Map"
+    }
+  }
+}

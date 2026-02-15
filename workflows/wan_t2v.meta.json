@@ -1,0 +1,47 @@
+{
+  "name": "Wan 2.1 Text-to-Video",
+  "description": "Generate video from text using Wan 2.1. Produces 480p or 720p video clips. The 1.3B model fits in 8GB VRAM, the 14B model needs 24GB+ VRAM. RTX 5090 can run the 14B model comfortably. Use Comfy Cloud for longer/higher-res generations.",
+  "category": "video",
+  "required_nodes": ["UNETLoader", "DualCLIPLoader", "VAELoader", "CLIPTextEncode", "EmptyWanLatentVideo", "KSampler", "VAEDecode"],
+  "required_custom_nodes": ["ComfyUI-VideoHelperSuite"],
+  "recommended_models": {
+    "unet": [
+      "wan2.1_t2v_14B_bf16.safetensors",
+      "wan2.1_t2v_1.3B_bf16.safetensors"
+    ],
+    "clip": ["clip_l.safetensors", "umt5_xxl_fp8_e4m3fn.safetensors"],
+    "vae": ["wan_2.1_vae.safetensors"]
+  },
+  "defaults": {
+    "unet_name": "wan2.1_t2v_14B_bf16.safetensors",
+    "clip_name": "clip_l.safetensors",
+    "t5_name": "umt5_xxl_fp8_e4m3fn.safetensors",
+    "vae_name": "wan_2.1_vae.safetensors",
+    "width": 832,
+    "height": 480,
+    "length": 81,
+    "steps": 30,
+    "cfg": 5.0,
+    "sampler_name": "euler",
+    "scheduler": "normal",
+    "fps": 16,
+    "negative_prompt": "static, blurry, low quality, watermark, text, deformed"
+  },
+  "constraints": {
+    "width": {"min": 480, "max": 1280, "step": 16},
+    "height": {"min": 480, "max": 1280, "step": 16},
+    "length": {"min": 17, "max": 161, "step": 4, "note": "Must be 4n+1 (17, 21, 25, ..., 81, ..., 161). 81 frames = ~5 sec at 16fps"},
+    "steps": {"min": 10, "max": 60},
+    "cfg": {"min": 1.0, "max": 15.0},
+    "fps": {"min": 8, "max": 30}
+  },
+  "tips": [
+    "Frame count must be 4n+1: 17, 21, 25, 33, 49, 65, 81, 97, 113, 129, 145, 161",
+    "81 frames at 16fps = ~5 seconds of video",
+    "832x480 is the sweet spot for quality/speed on RTX 5090",
+    "For longer clips, use Comfy Cloud (96GB VRAM)",
+    "Wan 2.1 14B produces much better quality than 1.3B"
+  ],
+  "tags": ["video", "wan", "t2v", "text-to-video", "ai-video", "cinema"],
+  "vram_estimate_gb": 24
+}

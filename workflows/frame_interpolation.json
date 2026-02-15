@@ -1,0 +1,53 @@
+{
+  "10": {
+    "inputs": {
+      "video": "PARAM_STR_INPUT_VIDEO",
+      "force_rate": 0,
+      "force_size": "Disabled",
+      "custom_width": 0,
+      "custom_height": 0,
+      "frame_load_cap": 0,
+      "skip_first_frames": 0,
+      "select_every_nth": 1
+    },
+    "class_type": "VHS_LoadVideo",
+    "_meta": {
+      "title": "Load Video"
+    }
+  },
+  "20": {
+    "inputs": {
+      "ckpt_name": "rife49.pth",
+      "clear_cache_after_n_frames": 10,
+      "multiplier": "PARAM_INT_MULTIPLIER",
+      "fast_mode": true,
+      "ensemble": true,
+      "scale_factor": 1.0,
+      "frames": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "RIFE VFI",
+    "_meta": {
+      "title": "RIFE Frame Interpolation"
+    }
+  },
+  "30": {
+    "inputs": {
+      "frame_rate": "PARAM_INT_FPS",
+      "loop_count": 0,
+      "filename_prefix": "cinema/interpolated",
+      "format": "video/h264-mp4",
+      "save_output": true,
+      "images": [
+        "20",
+        0
+      ]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": {
+      "title": "Save Video (MP4)"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "10": {
+    "inputs": {
+      "image": "PARAM_STR_INPUT_IMAGE",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Input Image"
+    }
+  },
+  "20": {
+    "inputs": {
+      "model_name": "PARAM_STR_UPSCALE_MODEL"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Load Upscale Model"
+    }
+  },
+  "30": {
+    "inputs": {
+      "upscale_model": [
+        "20",
+        0
+      ],
+      "image": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "ImageUpscaleWithModel",
+    "_meta": {
+      "title": "Upscale Image"
+    }
+  },
+  "40": {
+    "inputs": {
+      "filename_prefix": "cinema/upscaled",
+      "images": [
+        "30",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Upscaled Image"
+    }
+  }
+}

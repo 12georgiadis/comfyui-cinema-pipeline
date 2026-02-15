@@ -1,0 +1,31 @@
+{
+  "name": "SDXL Cinema Image",
+  "description": "Generate high-quality cinema stills using SDXL checkpoints. Supports any SDXL-compatible model (Juggernaut XL, RealVisXL, DreamShaper XL, etc.). Default resolution is 1344x768 (16:9 cinema aspect ratio).",
+  "category": "image",
+  "required_nodes": ["CheckpointLoaderSimple", "EmptyLatentImage", "CLIPTextEncode", "KSampler", "VAEDecode", "SaveImage"],
+  "required_custom_nodes": [],
+  "recommended_models": [
+    "juggernautXL_v9Rundiffusion.safetensors",
+    "realvisxlV50_v50Bakedvae.safetensors",
+    "dreamshaperXL_v21TurboDPMSDE.safetensors",
+    "sd_xl_base_1.0.safetensors"
+  ],
+  "defaults": {
+    "model": "sd_xl_base_1.0.safetensors",
+    "width": 1344,
+    "height": 768,
+    "steps": 30,
+    "cfg": 7.0,
+    "sampler_name": "dpmpp_2m",
+    "scheduler": "karras",
+    "negative_prompt": "text, watermark, logo, blurry, low quality, deformed, ugly, bad anatomy"
+  },
+  "constraints": {
+    "width": {"min": 512, "max": 2048, "step": 64},
+    "height": {"min": 512, "max": 2048, "step": 64},
+    "steps": {"min": 1, "max": 150},
+    "cfg": {"min": 1.0, "max": 30.0}
+  },
+  "tags": ["image", "sdxl", "cinema", "still", "concept-art"],
+  "vram_estimate_gb": 8
+}
