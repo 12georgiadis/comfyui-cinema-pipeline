@@ -1,13 +1,8 @@
 {
   "mcpServers": {
     "comfyui": {
-      "command": "node",
-      "args": ["./mcp-server/dist/index.js"],
-      "env": {
-        "COMFYUI_URL": "http://TAILSCALE_IP_PC:8188",
-        "WORKFLOW_DIR": "./workflows",
-        "PORT": "9000"
-      }
+      "type": "streamable-http",
+      "url": "http://127.0.0.1:9000/mcp"
     }
   }
 }
