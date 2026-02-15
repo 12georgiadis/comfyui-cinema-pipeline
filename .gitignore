@@ -1,0 +1,25 @@
+# MCP server
+mcp-server/
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets
+.env
+*.key
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+*.log
+
+# ComfyUI outputs (large files)
+output/
+input/
