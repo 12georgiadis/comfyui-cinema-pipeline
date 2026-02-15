@@ -102,6 +102,7 @@ Ready-to-use workflow templates in `workflows/`, auto-discovered by the MCP serv
 |---|---|---|---|
 | `sdxl_cinema_image` | Concept art, stills, moodboards | 8GB | Any SDXL checkpoint |
 | `wan_t2v` | Text-to-video (Wan 2.1 14B) | 24GB | 480p-720p, 16fps, ~5s clips |
+| `wan_i2v` | Animate still into video (Wan 2.1 I2V) | 28GB | First frame from image |
 | `img2img_cinema` | Style transfer, variations, film looks | 8GB | Denoise 0.3-0.7 for control |
 | `upscale_esrgan` | Upscale to 4K cinema resolution | 2GB | 4x with Real-ESRGAN |
 | `frame_interpolation` | Slow-motion, 16fps to 24fps | 4GB | RIFE optical flow |
@@ -116,13 +117,11 @@ Each template has a `.meta.json` sidecar with defaults, constraints, recommended
 git clone https://github.com/12georgiadis/comfyui-cinema-pipeline.git
 cd comfyui-cinema-pipeline
 
-# 2. Clone the MCP server
-git clone https://github.com/joenorton/comfyui-mcp-server.git mcp-server
-cd mcp-server && pip install -r requirements.txt && cd ..
+# 2. Run setup (clones MCP server, installs deps, creates .env)
+./scripts/setup.sh
 
-# 3. Configure
-cp .env.example .env
-# Edit .env with your ComfyUI IP and API keys
+# 3. Edit .env with your actual values
+# COMFYUI_URL, COMFY_CLOUD_API_KEY, TELEGRAM_*
 
 # 4. Start the MCP server
 ./scripts/start-mcp-server.sh

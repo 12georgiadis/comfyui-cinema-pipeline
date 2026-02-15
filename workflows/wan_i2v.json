@@ -1,0 +1,166 @@
+{
+  "10": {
+    "inputs": {
+      "unet_name": "PARAM_STR_UNET_NAME",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Wan I2V Model"
+    }
+  },
+  "11": {
+    "inputs": {
+      "clip_name1": "PARAM_STR_CLIP_NAME",
+      "clip_name2": "PARAM_STR_T5_NAME",
+      "type": "wan"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "Load CLIP + T5"
+    }
+  },
+  "12": {
+    "inputs": {
+      "vae_name": "PARAM_STR_VAE_NAME"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "13": {
+    "inputs": {
+      "image": "PARAM_STR_INPUT_IMAGE",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Source Image"
+    }
+  },
+  "15": {
+    "inputs": {
+      "text": "PARAM_PROMPT",
+      "clip": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Positive Prompt"
+    }
+  },
+  "16": {
+    "inputs": {
+      "text": "PARAM_NEGATIVE_PROMPT",
+      "clip": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Negative Prompt"
+    }
+  },
+  "20": {
+    "inputs": {
+      "width": "PARAM_INT_WIDTH",
+      "height": "PARAM_INT_HEIGHT",
+      "length": "PARAM_INT_LENGTH",
+      "batch_size": 1
+    },
+    "class_type": "EmptyWanLatentVideo",
+    "_meta": {
+      "title": "Empty Wan Latent Video"
+    }
+  },
+  "22": {
+    "inputs": {
+      "positive": [
+        "15",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ],
+      "image": [
+        "13",
+        0
+      ],
+      "width": "PARAM_INT_WIDTH",
+      "height": "PARAM_INT_HEIGHT",
+      "length": "PARAM_INT_LENGTH"
+    },
+    "class_type": "WanImageToVideo",
+    "_meta": {
+      "title": "Wan Image-to-Video Conditioning"
+    }
+  },
+  "25": {
+    "inputs": {
+      "seed": "PARAM_INT_SEED",
+      "steps": "PARAM_INT_STEPS",
+      "cfg": "PARAM_FLOAT_CFG",
+      "sampler_name": "PARAM_STR_SAMPLER_NAME",
+      "scheduler": "PARAM_STR_SCHEDULER",
+      "denoise": 1.0,
+      "model": [
+        "10",
+        0
+      ],
+      "positive": [
+        "22",
+        0
+      ],
+      "negative": [
+        "16",
+        0
+      ],
+      "latent_image": [
+        "22",
+        1
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "30": {
+    "inputs": {
+      "samples": [
+        "25",
+        0
+      ],
+      "vae": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "35": {
+    "inputs": {
+      "frame_rate": "PARAM_INT_FPS",
+      "loop_count": 0,
+      "filename_prefix": "cinema/wan_i2v",
+      "format": "video/h264-mp4",
+      "save_output": true,
+      "images": [
+        "30",
+        0
+      ]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": {
+      "title": "Save Video (MP4)"
+    }
+  }
+}

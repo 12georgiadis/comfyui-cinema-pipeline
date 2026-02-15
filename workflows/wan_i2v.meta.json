@@ -1,0 +1,47 @@
+{
+  "name": "Wan 2.1 Image-to-Video",
+  "description": "Animate a still image into video using Wan 2.1 I2V. Takes a source image and a motion prompt to create a video clip. Essential for cinema: generate a still frame, refine it, then animate it into a shot.",
+  "category": "video",
+  "required_nodes": ["UNETLoader", "DualCLIPLoader", "VAELoader", "LoadImage", "CLIPTextEncode", "EmptyWanLatentVideo", "WanImageToVideo", "KSampler", "VAEDecode"],
+  "required_custom_nodes": ["ComfyUI-VideoHelperSuite"],
+  "recommended_models": {
+    "unet": [
+      "wan2.1_i2v_720p_14B_bf16.safetensors",
+      "wan2.1_i2v_480p_14B_bf16.safetensors"
+    ],
+    "clip": ["clip_l.safetensors", "umt5_xxl_fp8_e4m3fn.safetensors"],
+    "vae": ["wan_2.1_vae.safetensors"]
+  },
+  "defaults": {
+    "unet_name": "wan2.1_i2v_480p_14B_bf16.safetensors",
+    "clip_name": "clip_l.safetensors",
+    "t5_name": "umt5_xxl_fp8_e4m3fn.safetensors",
+    "vae_name": "wan_2.1_vae.safetensors",
+    "width": 832,
+    "height": 480,
+    "length": 81,
+    "steps": 30,
+    "cfg": 5.0,
+    "sampler_name": "euler",
+    "scheduler": "normal",
+    "fps": 16,
+    "negative_prompt": "static, blurry, low quality, watermark, text"
+  },
+  "constraints": {
+    "width": {"min": 480, "max": 1280, "step": 16},
+    "height": {"min": 480, "max": 1280, "step": 16},
+    "length": {"min": 17, "max": 161, "step": 4, "note": "Must be 4n+1"},
+    "steps": {"min": 10, "max": 60},
+    "cfg": {"min": 1.0, "max": 15.0},
+    "fps": {"min": 8, "max": 30}
+  },
+  "tips": [
+    "Cinema workflow: generate still with SDXL -> refine -> animate with I2V",
+    "The source image sets the first frame; the prompt guides the motion",
+    "Use descriptive motion prompts: 'camera slowly pans left, wind blowing hair'",
+    "720p model needs ~30GB VRAM (use Comfy Cloud for this)",
+    "480p model fits on RTX 5090 (32GB)"
+  ],
+  "tags": ["video", "wan", "i2v", "image-to-video", "animation", "cinema"],
+  "vram_estimate_gb": 28
+}

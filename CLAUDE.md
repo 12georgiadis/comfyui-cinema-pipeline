@@ -38,6 +38,7 @@ Infrastructure de production cinema avec ComfyUI, orchestree par Claude Code via
 | `img2img_cinema` | Image-to-Image (variations, looks) | 8GB |
 | `upscale_esrgan` | Upscale 4x (Real-ESRGAN) | 2GB |
 | `frame_interpolation` | Slow-motion RIFE | 4GB |
+| `wan_i2v` | Wan 2.1 Image-to-Video | 28GB |
 | `depth_map` | Depth Anything V2 (VFX) | 2GB |
 
 Chaque workflow a un `.meta.json` avec les defaults, contraintes, modeles recommandes.
