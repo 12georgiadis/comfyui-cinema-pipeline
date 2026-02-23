@@ -67,24 +67,30 @@ All links are real. All stability ratings are honest. No hype.
 | [Hybrid Local/Cloud](docs/06-hybrid-local-cloud.md) | RTX 5090 + Comfy Cloud + RunComfy + ComfyUI-Distributed |
 | [Open Creative Studio (OCS)](docs/07-ocs-perilli.md) | Alessandro Perilli's all-in-one ComfyUI system |
 | [Hardware Guide](docs/08-hardware.md) | VRAM requirements, GPU benchmarks, optimization |
+| [**Blender VSE + AI Workflow**](docs/09-blender-vse-workflow.md) | **Pallaidium, tin2tin ecosystem, ControlNet stills→video, FCP roundtrip** |
 
 ---
 
 ## Key findings (TL;DR)
 
-### What works now
+### What works now (updated Feb 2026)
 - ComfyUI + MCP servers = Claude Code can generate images/video programmatically
-- Wan 2.1/2.2 video generation is production-quality for specific use cases
+- **LTX-2**: 4K, 50fps, 20s, audio+video in one pass — production-grade
+- **Wan 2.2**: 1080p native, MoE architecture, camera control
+- **Flux.2 Klein**: 4MP output, 10-image multi-reference, ControlNet support
+- **Seedance 2.0** (ByteDance): 2K cinema-grade, audio sync, Feb 2026
 - SAM 3 rotoscoping replaces hours of manual work
 - StyleTransferPlus + EbSynth = temporal-consistent artistic looks
+- **Blender VSE + Pallaidium**: stills → video via ControlNet depth workflow
+- **FCP → Blender VSE roundtrip** via tin2tin/fcpxml_import (stable)
+- **Blender VSE → DaVinci via OTIO** (tin2tin/VSE_OTIO_Export, stable)
 - Mobile access via Tailscale + Telegram bot or PWA
 
 ### What doesn't work yet
-- No NLE has native ComfyUI integration (DaVinci Resolve is closest via API)
-- No "CapCut but pro" exists -- the workflow is still export/process/reimport
-- ComfyUI-BlenderAI-node has 90% installation failure rate
-- Final Cut Pro is a dead end (Apple walled garden)
+- Blender VSE → FCP roundtrip (OTIO→FCP unreliable; use DaVinci as intermediary)
+- ComfyUI-BlenderAI-node on macOS (Windows only, unstable on Mac)
 - Comfy Cloud and local ComfyUI don't have transparent switching
+- True headless NLE for AI agent control (research phase)
 
 ### What we're building
 - MCP server configured for cinema workflows
@@ -137,14 +143,18 @@ python scripts/detect-nodes.py http://YOUR_COMFYUI_IP:8188
 | Tool | Score | Notes |
 |---|---|---|
 | ComfyUI core | 9/10 | Rock solid |
-| Wan 2.1/2.2 workflows | 8/10 | Dominant video ecosystem |
+| **LTX-2** | **9/10** | **4K, 50fps, 20s, audio+video — production-ready** |
+| Wan 2.2 workflows | 8/10 | MoE architecture, 1080p native, camera control |
+| **Flux.2 Klein** | **8/10** | **4MP, 10-image multi-ref, ControlNet stable** |
+| **Seedance 2.0** | **7/10** | **2K cinema-grade, audio sync — Feb 2026** |
 | ComfyUI MCP servers | 6/10 | Multiple options, some rough edges |
 | DaVinci Resolve MCP | 5/10 | Functional, needs custom dev |
 | SwarmUI | 7/10 | Good compromise simplicity/power |
 | MCWW (mobile UI) | 7/10 | Auto-adapts to any workflow |
 | Comfy Cloud | 7/10 | Works but expensive for heavy use |
-| Blender Pallaidium | 5/10 | Windows only, fragile |
-| FCP + ComfyUI | 0/10 | Does not exist |
+| **Blender Pallaidium (Windows)** | **7/10** | **Production-ready on Windows, experimental macOS** |
+| FCP → Blender roundtrip | 5/10 | FCPXML import stable (tin2tin), export unreliable |
+| FCP + ComfyUI direct | 0/10 | Does not exist |
 
 ---
 
