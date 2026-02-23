@@ -1,10 +1,27 @@
 # ComfyUI Cinema Pipeline
 
-Research & architecture for using ComfyUI as a professional cinema production tool, orchestrated by Claude Code (LLM CLI agent).
+**AI/generative pipeline architecture for professional cinema production.**
 
-**Target**: auteur cinema (feature films, post-documentary, experimental). Not hobbyist image generation.
+Built by a filmmaker for filmmakers. Not hobbyist image generation.
 
-**Hardware**: RTX 5090 (32GB local) + Comfy Cloud (96GB RTX 6000 Pro) + Mac for editing.
+The hard problem in AI cinema is temporal consistency across a full shot — keeping hair, clothes, micro-details coherent frame by frame. That's what this pipeline solves, by routing Blender 3D geometry data into ComfyUI as ControlNet conditioning.
+
+This repo documents what works, what doesn't, and how to wire it all together for a real production.
+
+**Author:** [Ismaël Joffroy Chandoutis](https://ismaeljoffroychandoutis.com/) — post-documentary filmmaker, César 2022, Cannes (Semaine de la Critique). These workflows are tested on real productions.
+
+**Hardware:** RTX 5090 (32GB local) + Comfy Cloud (96GB RTX 6000 Pro) + Mac for editing.
+
+---
+
+## Films made with this pipeline
+
+| Film | Festival | AI use |
+|---|---|---|
+| *The Goldberg Variations* (in dev) | Villa Albertine 2026 | Full generative pipeline — Blender scenes → ControlNet → Wan 2.2 |
+| *Virus* (in dev) | — | Cybercrime infrastructure visualization, Gaussian Splatting |
+
+*Screenshots and workflow exports from production will be added here as the films progress.*
 
 ---
 
@@ -155,6 +172,19 @@ python scripts/detect-nodes.py http://YOUR_COMFYUI_IP:8188
 | **Blender Pallaidium (Windows)** | **7/10** | **Production-ready on Windows, experimental macOS** |
 | FCP → Blender roundtrip | 5/10 | FCPXML import stable (tin2tin), export unreliable |
 | FCP + ComfyUI direct | 0/10 | Does not exist |
+
+---
+
+## Screenshots wanted
+
+This repo needs visual documentation. If you're using these workflows in production, PRs with screenshots are the most valuable contribution possible.
+
+What's needed:
+- LTX-2 output examples (before/after)
+- Wan 2.2 I2V from Blender depth pass
+- Temporal consistency comparison (with/without ControlNet depth)
+- DaVinci Resolve MCP in action
+- Mobile access (Telegram bot, PWA)
 
 ---
 
